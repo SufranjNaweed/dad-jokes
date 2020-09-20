@@ -1,3 +1,81 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header{
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 20px;
+  background-color: #fff;
+  h1{
+    width: 80%;
+    letter-spacing: 4px;
+  }
+  nav{
+    width: 20%;
+    display: flex;
+    ul{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      li{
+        list-style: none;
+        a{
+          text-decoration: none;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+footer{
+  width: 100%;
+  padding: 10px 15px;
+  p{
+    text-align: center;
+  }
+}
+
+.container{
+  max-width: 1180px;
+  margin: auto;
+  padding: 15px;
+}
+
+section{
+  padding-top: 80px;
+  min-height: 90vh;
+  h2{
+    text-align: center;
+  }
+}
+
+.jokes-container{
+  .joke-card{
+    max-width: 750px;
+    min-height: 150px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow:  20px 20px 60px #d9d9d9, 
+                -20px -20px 60px #ffffff;
+    .joke-title{
+      min-height: 100px;
+      p{
+        text-align: center;
+      }
+    }
+    .joke-action-container{
+      min-height: 50px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
