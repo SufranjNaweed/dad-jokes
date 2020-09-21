@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
+import JokesContextProvider from '../contexts/Jokes'
+
 import Header from '../components/header'
 import Footer from '../components/footer'
 import home from '../pages/home'
@@ -11,8 +13,10 @@ const route = () => {
         <Router>
             <Header />
             <Switch>
-                <Route exact path="/" component={home} />
-                <Route path="/favorites" component={favorites} />
+                <JokesContextProvider>
+                    <Route exact path="/" component={home} />
+                    <Route path="/favorites" component={favorites} />
+                </JokesContextProvider>
             </Switch>
             <Footer />
         </Router>
