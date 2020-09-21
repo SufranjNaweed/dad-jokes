@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext, } from 'react'
 import axios from 'axios'
+import {JokesContext} from '../contexts/Jokes.js'
 
 const Home = () => {
-   const [joke, setJoke] = useState()
+   const [joke, setJoke] = useState({})
+   const {saveOneJoke} = useContext(JokesContext)
 
     useEffect(() => {
         fetchJoke()
+        console.log(JokesContext)
+        //console.log("jokes : ", jokes)
     }, [])
 
     const fetchJoke = async () => {
@@ -35,7 +39,6 @@ const Home = () => {
     return(
         <section>
             <div className="container">
-                <h2>Home</h2>
                 <div className="jokes-container">
                     <div className="joke-card">
                         <div className="joke-title">
@@ -43,10 +46,8 @@ const Home = () => {
                         </div>
                         <div className="joke-action-container">
                             <button onClick={fetchJoke}>new joke</button>
-                            <button 
-                                onClick={copyClipboard}
-                            >share</button>
-                            <button>favorite</button>
+                            <button onClick={copyClipboard}>share</button>
+                            <button onClick={() => { joke.joke ? saveOneJoke(joke) : console.log("nothing to save") }}>favorite</button>
                         </div>
                     </div>
                 </div>

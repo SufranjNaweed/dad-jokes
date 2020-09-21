@@ -3,38 +3,39 @@ import React, {createContext, useState} from 'react'
 export const JokesContext = createContext()
 
 const JokesContextProvider = (props) => {
-    const [JokesSaved, saveJokes] = useState([])
+    const [jokes, setJokes] = useState([])
 
-    const deleteOneJokes = async (jokeToDelete) => {
+    const saveOneJoke = async (newJoke) => {
         try {
-            const newJokes = await JokesSaved.filter(joke => joke.id !== jokeToDelete.id)
-            await saveJokes(newJokes)
-        }
-        finally {}
-    }
-
-    const deleteAllJokes = async () => {
-        saveJokes()
-    }
-
-    const saveOneJokes = async (newJoke) => {
-        try {
-            const isAlreadySaved = await JokesSaved.filter(joke => joke.id === newJoke.id)
+            console.log("saveOneJokes -> newJoke", newJoke)
+            const isAlreadySaved = await jokes.filter(joke => joke.id === newJoke.id)
             if(!isAlreadySaved)
-                return await saveJokes([newJoke,...JokesSaved])
+                return await setJokes([newJoke, ...jokes])
             else
                 return -1
         }
         finally {}
     }
 
+    const deleteAllJokes = async () => {
+        setJokes([])
+    }
+
+    const deleteOneJokes = async (jokeToDelete) => {
+        try {
+            const newJokes = await jokes.filter(joke => joke.id !== jokeToDelete.id)
+            await setJokes(newJokes)
+        }
+        finally {}
+    }
+
     return(
         <JokesContext.Provider
-            value= {{
-                JokesSaved : JokesSaved,
-                saveOneJokes : saveOneJokes,
-                deleteOneJokes : deleteOneJokes,
-                deleteAllJokes : deleteAllJokes
+            value={{
+                jokes : jokes,
+                saveOneJoke : saveOneJoke,
+                deleteAllJokes : deleteAllJokes,
+                deleteOneJokes : deleteOneJokes
             }}
         >
             {props.children}
