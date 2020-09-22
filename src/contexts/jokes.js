@@ -1,4 +1,5 @@
 import React, {createContext, useState, useEffect} from 'react'
+import { toast } from 'react-toastify';
 
 export const JokesContext = createContext()
 
@@ -33,9 +34,11 @@ const JokesContextProvider = (props) => {
                 if(storage){
                     storage = JSON.parse(storage)
                     await localStorage.setItem("jokes", JSON.stringify([newJoke, ...storage]))
+                    toast.success("🤣 OMEGALUL I'll keep it 💗")
                 }
                 else{
                     await localStorage.setItem("jokes", JSON.stringify([newJoke, ...jokes]))
+                    toast.success("🤣 OMEGALUL I'll keep it 💗")
                 }
                 return 0
             }
@@ -54,7 +57,8 @@ const JokesContextProvider = (props) => {
         try {
             const newJokes = await jokes.filter(joke => joke.id !== jokeToDelete.id)
             await setJokes(newJokes)
-            await localStorage.setItem("jokes", JSON.stringify(jokes))
+            await localStorage.setItem("jokes", JSON.stringify([...jokes]))
+            toast.warn("❌ It wasnt so funny after all ❌")
         }
         finally {}
     }
