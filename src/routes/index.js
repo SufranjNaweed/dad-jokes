@@ -10,7 +10,7 @@ import favorites from '../pages/favorites'
 
 const route = () => {
     return(
-        <Router>
+        <Router basename="/dad-jokes">
             <Header />
             <Switch>
                 <JokesContextProvider>
