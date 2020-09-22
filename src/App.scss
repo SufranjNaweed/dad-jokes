@@ -1,4 +1,11 @@
+$blue : #457b9d;
+$green : #2a9d8f;
+$red : #e63946;
+$light : #f7fff7;
+$dark : #2b2d42;
+
 *{
+  color: $dark;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,21 +21,33 @@ header{
   padding: 20px;
   background-color: #fff;
   h1{
-    width: 80%;
-    letter-spacing: 4px;
+    width: 60%;
+    letter-spacing: 2px;
+    font-size: 18px;
+    @media screen and (min-width : 689px){
+     width: 80%; 
+     font-size: 32px;
+     letter-spacing: 4px;
+    }
   }
   nav{
-    width: 20%;
+    width: 40%;
     display: flex;
+    @media screen and (min-width : 689px){
+      width: 20%;
+    }
     ul{
       width: 100%;
       display: flex;
       justify-content: space-around;
       li{
         list-style: none;
+        padding: 0 5px;
         a{
+          color: $dark;
           text-decoration: none;
           font-weight: bold;
+          text-transform: uppercase;
         }
       }
     }
@@ -36,10 +55,16 @@ header{
 }
 
 footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  padding: 10px 15px;
+  padding: 20px 15px;
+  background-color: $red;
   p{
     text-align: center;
+    color: $light;
   }
 }
 
@@ -58,34 +83,79 @@ section{
 }
 
 .jokes-container{
+  margin: 30px auto;
   .joke-card{
     max-width: 750px;
     min-height: 150px;
     margin: 20px auto;
     padding: 20px;
     border-radius: 10px;
-    background: #ffffff;
-    box-shadow:  20px 20px 60px #d9d9d9, 
+    background: $light;
+    box-shadow:  20px 20px 60px #d2d9d2, 
                 -20px -20px 60px #ffffff;
     .joke-title{
       min-height: 100px;
       p{
         text-align: center;
         padding: 30px 10px;
+        font-size: 20px;
       }
     }
     .joke-action-container{
       min-height: 50px;
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
+      justify-content: space-around;
+      @media screen and (min-width : 689px){
+        flex-direction: row;
+        justify-content: flex-end;
+      }
       button{
+        width: 100%;
+        margin: 10px auto;
         cursor: pointer;
+        text-transform: uppercase;
         padding: 10px 15px;
         font-size: 16px;
-        background-color: #fff;
-        border: transparent;
+        background-color: transparent;
         letter-spacing: 2px;
+        border-radius: 8px;
+        transition: 0.3s background-color ease-in;
+        @media screen and (min-width : 689px){
+          width: auto;
+          margin: 0;
+          margin-left: 10px;
+        }
+        &.save{
+          border: solid 1px $red;
+          &:hover{
+            color: $light;
+            background-color: $red;
+          }
+        }
+        &.share{
+          border: solid 1px $blue;
+          &:hover{
+            color: $light;
+            background-color: $blue;
+          }
+        }
+        &.new{
+          border: solid 1px $green;
+          &:hover{
+            color: $light;
+            background-color: $green;
+          }
+        }
       }
     }
   }
+}
+
+.page-title{
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 32px;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
