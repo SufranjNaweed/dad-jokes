@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const JokeCard = ({joke, saveOneJoke, fetchJoke, deleteOneJokes}) => {
     const copyClipboard = async (joke) => {
-        console.log(joke)
         if(joke){
             navigator.clipboard.writeText(joke.joke)
             toast.info('📎 Link is in your paste bin')

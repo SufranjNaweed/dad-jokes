@@ -21,7 +21,6 @@ const Home = () => {
             }
             const res =  await axios.get('https://icanhazdadjoke.com/', {headers: header})
             if (res.data){
-                console.log(res.data)
                 setJoke(res.data)
                 toast("🎁 Gotta new joke for you 🤣")
             }
