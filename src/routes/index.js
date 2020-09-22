@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import JokesContextProvider from '../contexts/Jokes'
+import JokesContextProvider from '../contexts/jokes'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
