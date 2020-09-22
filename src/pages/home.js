@@ -8,8 +8,6 @@ const Home = () => {
 
     useEffect(() => {
         fetchJoke()
-        console.log(JokesContext)
-        //console.log("jokes : ", jokes)
     }, [])
 
     const fetchJoke = async () => {

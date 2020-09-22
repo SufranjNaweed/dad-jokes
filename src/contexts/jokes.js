@@ -1,16 +1,44 @@
-import React, {createContext, useState} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 
 export const JokesContext = createContext()
 
 const JokesContextProvider = (props) => {
     const [jokes, setJokes] = useState([])
 
+    useEffect(() => {
+        if(jokes.length === 0){
+            getLocalStorageJokes()
+        }
+    }, [])
+
+    const getLocalStorageJokes = () => {
+        let storage = localStorage.getItem("jokes")
+        if(storage){
+            storage = JSON.parse(storage)
+            setJokes([...storage])
+        }
+        else{
+            setJokes([])
+        }
+    }
+
     const saveOneJoke = async (newJoke) => {
         try {
-            console.log("saveOneJokes -> newJoke", newJoke)
+            // check if is joke is already saved
             const isAlreadySaved = await jokes.filter(joke => joke.id === newJoke.id)
-            if(!isAlreadySaved)
-                return await setJokes([newJoke, ...jokes])
+            if(isAlreadySaved.length === 0){
+                // save into state
+                await setJokes([newJoke, ...jokes])
+                let storage = await localStorage.getItem('jokes')
+                if(storage){
+                    storage = JSON.parse(storage)
+                    await localStorage.setItem("jokes", JSON.stringify([newJoke, ...storage]))
+                }
+                else{
+                    await localStorage.setItem("jokes", JSON.stringify([newJoke, ...jokes]))
+                }
+                return 0
+            }
             else
                 return -1
         }
@@ -19,12 +47,14 @@ const JokesContextProvider = (props) => {
 
     const deleteAllJokes = async () => {
         setJokes([])
+        localStorage.setItem("jokes", JSON.stringify([]))
     }
 
     const deleteOneJokes = async (jokeToDelete) => {
         try {
             const newJokes = await jokes.filter(joke => joke.id !== jokeToDelete.id)
             await setJokes(newJokes)
+            await localStorage.setItem("jokes", JSON.stringify(jokes))
         }
         finally {}
     }
