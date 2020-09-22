@@ -15,7 +15,7 @@ const route = () => {
             <Switch>
                 <JokesContextProvider>
                     <Route exact path="/" component={home} />
-                    <Route path="/favorites" component={favorites} />
+                    <Route path="/favorites/" component={favorites} />
                 </JokesContextProvider>
             </Switch>
             <Footer />
